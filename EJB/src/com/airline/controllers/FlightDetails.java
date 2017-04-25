@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.airline.service.FlightLocal;
+import com.airline.service.FlightRemote;
 
 /**
  * Servlet implementation class FlightDetails
@@ -19,9 +20,13 @@ import com.airline.service.FlightLocal;
 public class FlightDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	// a new flight service object from the EJB container pool
+	// a new flight service object from the EJB container pool using Local interface
 	@EJB
 	private FlightLocal fs;
+	
+	// a new flight service object using Remote interface
+	@EJB
+	private FlightRemote fsRemote;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,6 +45,7 @@ public class FlightDetails extends HttpServlet {
 		out.println("The flight details servlet has been called ...");
 		
 		out.println("Flight details: " + fs.getFrom() + " to " + fs.getTo());
+		out.println("Flight details: " + fsRemote.getFrom() + " to " + fsRemote.getTo());
 	}
 
 	/**
