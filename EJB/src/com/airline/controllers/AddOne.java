@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.airline.service.CounterBean;
 import com.airline.service.CounterStatefulBean;
@@ -26,8 +27,8 @@ public class AddOne extends HttpServlet {
 	CounterBean cb;
 	
 	// stateful bean
-	@EJB
-	CounterStatefulBean cbStateful;
+	// @EJB
+	// CounterStatefulBean cbStateful;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +44,9 @@ public class AddOne extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		// for stateful bean instead of injecting bean here, use bean from the session listener
+		HttpSession s = request.getSession();
+		
 		PrintWriter out = response.getWriter();
 		
 		// show present count and value after adding 1
@@ -51,8 +55,13 @@ public class AddOne extends HttpServlet {
 		out.println("SINGLETON - Increased value of count: " + cb.getCount());
 		
 		// for stateful bean - bean lives within the servlett life
-		out.println("STATEFUL - Value of count: " + cbStateful.getCount());		
-		cbStateful.addOneToCount();		
+		// out.println("STATEFUL - Value of count: " + cbStateful.getCount());		
+		// cbStateful.addOneToCount();		
+		// out.println("STATEFUL - Increased value of count: " + cbStateful.getCount());
+		
+		CounterStatefulBean cbStateful = (CounterStatefulBean) s.getAttribute("cbStateful");
+		out.println("STATEFUL - Value of count: " + cbStateful.getCount());
+		cbStateful.addOneToCount();
 		out.println("STATEFUL - Increased value of count: " + cbStateful.getCount());
 	}
 

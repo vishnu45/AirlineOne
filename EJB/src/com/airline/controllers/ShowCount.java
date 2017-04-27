@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.airline.service.CounterBean;
 import com.airline.service.CounterStatefulBean;
@@ -25,8 +26,8 @@ public class ShowCount extends HttpServlet {
 	CounterBean cb;
 	
 	// stateful bean
-	@EJB
-	CounterStatefulBean cbStateful;
+	// @EJB
+	// CounterStatefulBean cbStateful;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,6 +46,9 @@ public class ShowCount extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.println("SINGLETON BEAN - Value of count: " + cb.getCount());
+		
+		HttpSession s = request.getSession();
+		CounterStatefulBean cbStateful = (CounterStatefulBean) s.getAttribute("cbStateful");
 		out.println("STATEFUL BEAN - Value of count: " + cbStateful.getCount());
 	}
 
