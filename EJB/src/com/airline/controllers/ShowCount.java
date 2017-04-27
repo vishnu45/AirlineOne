@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.airline.service.CounterBean;
+import com.airline.service.CounterStatefulBean;
 
 /**
  * Servlet implementation class ShowCount
@@ -19,8 +20,13 @@ import com.airline.service.CounterBean;
 public class ShowCount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// singleton bean
 	@EJB
 	CounterBean cb;
+	
+	// stateful bean
+	@EJB
+	CounterStatefulBean cbStateful;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,8 +44,8 @@ public class ShowCount extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		
-		out.println("Value of count: " + cb.getCount());
-		
+		out.println("SINGLETON BEAN - Value of count: " + cb.getCount());
+		out.println("STATEFUL BEAN - Value of count: " + cbStateful.getCount());
 	}
 
 	/**
