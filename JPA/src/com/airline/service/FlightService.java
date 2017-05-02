@@ -38,6 +38,7 @@ public class FlightService {
     	em.persist(a);
     }
     
+    // to assign a pilot to a flight
     public void addPilotToFlight(String pilotId, String flightId) {
     	// use the named queries
     	// arg1 - namedQuery, arg2 - class name of flight entity
@@ -65,6 +66,16 @@ public class FlightService {
     	
     	// also assign the flight to the pilot
     	p.setFlightForPilot(f);
+    }
+    
+    // to get list of all flights present in the system
+    public List<Flight> getFlights() {
+    	
+    	// create a named query- to retrieve all flight objects
+    	// here we use createQuery instead of createNamedQuery since we are building from scratch
+    	TypedQuery<Flight> query = em.createQuery("SELECT f FROM Flight f", Flight.class);
+    	List<Flight> results = query.getResultList();    	
+    	return results;
     }
 
 }
