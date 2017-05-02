@@ -10,11 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  * Entity implementation class for Entity: Pilot
  *
  */
+// allows us to declare a db query on the pilot entity
+// give some arbitary name to the query
+@NamedQuery(name="Pilot.findById",query="SELECT p FROM Pilot p WHERE p.id = :id")
 @Entity
 
 public class Pilot implements Serializable {
@@ -28,7 +32,7 @@ public class Pilot implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 	
 	private String firstName;
 	
@@ -46,11 +50,11 @@ public class Pilot implements Serializable {
 	private Flight flightForPilot;
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getFirstName() {
@@ -95,7 +99,7 @@ public class Pilot implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pilot [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", pilotLicense="
+		return "Pilot [Id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", pilotLicense="
 				+ pilotLicense + ", pilotRank=" + pilotRank + ", flightForPilot=" + flightForPilot + "]";
 	}
 	

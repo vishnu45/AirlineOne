@@ -24,7 +24,7 @@ public class Airplane implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 
 	private String planeMake;
 
@@ -37,11 +37,11 @@ public class Airplane implements Serializable {
 	private Flight flight;
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getPlaneMake() {
@@ -70,7 +70,7 @@ public class Airplane implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Airplane [Id=" + Id + ", planeMake=" + planeMake + ", modelName=" + modelName + ", seatingCapacity="
+		return "Airplane [Id=" + id + ", planeMake=" + planeMake + ", modelName=" + modelName + ", seatingCapacity="
 				+ seatingCapacity + "]";
 	}
 

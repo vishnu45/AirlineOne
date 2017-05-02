@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -20,6 +21,7 @@ import javax.persistence.TemporalType;
  * Entity implementation class for Entity: Flight
  *
  */
+@NamedQuery(name = "Flight.findById", query = "SELECT f from Flight f where f.id = :id")
 @Entity
 
 public class Flight implements Serializable {
