@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: Airplane
@@ -30,6 +31,10 @@ public class Airplane implements Serializable {
 	private String modelName;
 
 	private Integer seatingCapacity;
+	
+	// to create a 1to1 mapping, get the foreign key from the other table/class
+	@OneToOne(mappedBy = "airplaneDetail")
+	private Flight flight;
 
 	public Integer getId() {
 		return Id;
@@ -68,5 +73,15 @@ public class Airplane implements Serializable {
 		return "Airplane [Id=" + Id + ", planeMake=" + planeMake + ", modelName=" + modelName + ", seatingCapacity="
 				+ seatingCapacity + "]";
 	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+	
+	
 
 }

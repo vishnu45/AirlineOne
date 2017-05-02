@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,10 +29,12 @@ public class Flight implements Serializable {
 		super();
 	}
 	
+	// primary key fo the flight entity
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	// to store the enumeration type as a string rather than as an integer
 	@Enumerated(EnumType.STRING)
 	private FlightDestinations flightOrigin;
 	
@@ -39,12 +43,19 @@ public class Flight implements Serializable {
 	
 	private Integer price;
 	
+	// to store as a timestamp type in database
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date flightTime;
 
 	public Integer getId() {
 		return id;
 	}
+	
+	// to create a one to one mapping to airplane
+	// this will be the foreign key to airplane
+	@OneToOne
+	@JoinColumn(name = "airplane_fk")
+	private Airplane airplaneDetail;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -86,6 +97,14 @@ public class Flight implements Serializable {
 	public String toString() {
 		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
 				+ ", price=" + price + ", flightTime=" + flightTime + "]";
+	}
+
+	public Airplane getAirplaneDetail() {
+		return airplaneDetail;
+	}
+
+	public void setAirplaneDetail(Airplane airplaneDetail) {
+		this.airplaneDetail = airplaneDetail;
 	}
    
 }
