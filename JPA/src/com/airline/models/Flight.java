@@ -115,4 +115,12 @@ public class Flight implements Serializable {
 		this.airplaneDetail = airplaneDetail;
 	}
 
+	public List<Pilot> getPilots() {
+		return pilots;
+	}
+
+	public void setPilots(List<Pilot> pilots) {
+		this.pilots = pilots;
+	}
+
 }
