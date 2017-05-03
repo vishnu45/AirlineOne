@@ -42,9 +42,9 @@ public class Passengers extends HttpServlet {
 		// save flights onto a attribute of request
 		request.setAttribute("passenger_list", pList);
 		
-		// to dispatch flight details to a JSP
-//		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/passenger_list.jsp");
-//		view.forward(request, response);
+		// to dispatch passenger details to a JSP
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/passenger_list.jsp");
+		view.forward(request, response);
 	}
 
 	/**
