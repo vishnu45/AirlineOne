@@ -1,9 +1,12 @@
 package com.airline.service;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.airline.models.Passenger;
 
@@ -29,6 +32,13 @@ public class PassengerService {
     public void addPassenger(Passenger p) {
     	
     	em.persist(p);
+    }
+    
+    // to get list of all passengers
+    public List<Passenger> getPassengers() {
+    	TypedQuery<Passenger> query = em.createQuery("SELECT p from Passenger p",Passenger.class);
+    	List<Passenger> pList = query.getResultList();
+    	return pList;
     }
 
 }
