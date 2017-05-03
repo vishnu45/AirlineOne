@@ -1,10 +1,10 @@
 package com.airline.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +39,11 @@ public class Flights extends HttpServlet {
 
 		List<Flight> fList = (List<Flight>) fs.getFlights();
 		// save flights onto a attribute of request
-		request.setAttribute("flight list", fList);
+		request.setAttribute("flight_list", fList);
 		
-		PrintWriter out = response.getWriter();
-		out.println("List of flights will be displayed here...");
+		// to dispatch flight details to a JSP
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/flight_list.jsp");
+		view.forward(request, response);
 	}
 
 	/**
