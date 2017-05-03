@@ -35,7 +35,7 @@ public class FlightService {
     // persisting airplane and flight data onto db
     public void addFlight(Flight f, Airplane a) {
     	em.persist(f);
-    	em.persist(a);
+    	// em.persist(a); // propogated and cascaded from flight and saved automatically
     }
     
     // to assign a pilot to a flight

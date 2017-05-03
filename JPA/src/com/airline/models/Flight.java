@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -52,7 +53,10 @@ public class Flight implements Serializable {
 
 	// to create a one to one mapping to airplane
 	// this will be the foreign key to airplane
-	@OneToOne
+	// @OneToOne
+	// persist - so that when flight is added, airplane gets added as well
+	// remove - when flight is removed, linked airplane also gets removed
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	@JoinColumn(name = "airplane_fk")
 	private Airplane airplaneDetail;
 	
