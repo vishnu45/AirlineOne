@@ -26,6 +26,7 @@
 			for (Integer i = 0; i < pList.size(); i++) {
 		%>
 			<tr>
+				<td><%= pList.get(i).getId() %></td>
 				<td><%= pList.get(i).getFirstName() %></td>
 				<td><%= pList.get(i).getLastName() %></td>
 				<td><%= pList.get(i).getDob() %></td>
