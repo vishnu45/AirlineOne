@@ -97,6 +97,9 @@ public class AddFlight extends HttpServlet {
 		
 		fs.addFlight(f,a);
 		
+		// redirect to show flight list once added
+		response.sendRedirect("Flights");
+		
 	}
 
 }

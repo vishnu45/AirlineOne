@@ -37,7 +37,7 @@ public class AddPilotToFlight extends HttpServlet {
 		String pid = request.getParameter("pid");
 		String fid = request.getParameter("fid");
 		
-		fs.addPilotToFlight(pid, fid);
+		// fs.addPilotToFlight(pid, fid);
 	}
 
 	/**

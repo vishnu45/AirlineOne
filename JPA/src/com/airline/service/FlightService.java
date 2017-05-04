@@ -38,36 +38,6 @@ public class FlightService {
     	// em.persist(a); // propogated and cascaded from flight and saved automatically
     }
     
-    // to assign a pilot to a flight
-    public void addPilotToFlight(String pilotId, String flightId) {
-    	// use the named queries
-    	// arg1 - namedQuery, arg2 - class name of flight entity
-    	// based on the flightId passed into the method, the flight object is pulled up
-    	TypedQuery<Flight> fQuery = em.createNamedQuery("Flight.findById", Flight.class);
-    	
-    	// set the id parameter in the namedQuery with that of the flight being passed
-    	// to retrieve the exact flight
-    	// parse the string flightId to Integer
-    	fQuery.setParameter("id", Integer.parseInt(flightId));
-    	
-    	// get the flight object for the id passed
-    	Flight f = fQuery.getSingleResult();
-    	
-    	TypedQuery<Pilot> pQuery = em.createNamedQuery("Pilot.findById", Pilot.class);
-    	pQuery.setParameter("id", Integer.parseInt(pilotId));
-    	Pilot p = pQuery.getSingleResult();
-    	
-    	// retrieve all pilots for the flight
-    	List<Pilot> pList = f.getPilots();
-    	
-    	// add new pilot to existing list
-    	pList.add(p);
-    	f.setPilots(pList);
-    	
-    	// also assign the flight to the pilot
-    	p.setFlightForPilot(f);
-    }
-    
     // to get list of all flights present in the system
     public List<Flight> getFlights() {
     	

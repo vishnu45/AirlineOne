@@ -137,7 +137,7 @@
 
 	<h1>Add pilot to flight</h1>
 
-	<form method="POST" action="">
+	<form method="POST" action="CreatePilotAndAddToFlight">
 
 		First name:  
 
