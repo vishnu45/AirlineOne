@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -64,6 +66,12 @@ public class Flight implements Serializable {
 	// mappedBy for creating the reference to pilot (like foreign key)
 	@OneToMany(mappedBy = "flightForPilot")
 	private List<Pilot> pilots;
+	
+	// the list of passengers who have been reserved for the flight
+	@ManyToMany
+	// f_p_join table for the many2many mapping, flight_fk for join, 1 additional fk - passenger_fk
+	@JoinTable(name = "f_p_join", joinColumns = @JoinColumn(name = "flight_fk"), inverseJoinColumns = @JoinColumn(name="passenger_fk"))
+	private List<Passenger> passengers;
 
 	public Integer getId() {
 		return id;
@@ -105,12 +113,6 @@ public class Flight implements Serializable {
 		this.flightTime = flightTime;
 	}
 
-	@Override
-	public String toString() {
-		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
-				+ ", price=" + price + ", flightTime=" + flightTime + "]";
-	}
-
 	public Airplane getAirplaneDetail() {
 		return airplaneDetail;
 	}
@@ -126,5 +128,19 @@ public class Flight implements Serializable {
 	public void setPilots(List<Pilot> pilots) {
 		this.pilots = pilots;
 	}
+
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
+	}
+	
+	@Override
+	public String toString() {
+		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
+				+ ", price=" + price + ", flightTime=" + flightTime + "]";
+	}	
 
 }

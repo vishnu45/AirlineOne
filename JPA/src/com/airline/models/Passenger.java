@@ -2,6 +2,7 @@ package com.airline.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -48,6 +50,12 @@ public class Passenger implements Serializable {
 	// so that enum type is created as a string and not a value
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
+	
+	// the list of flights/flight reservations the passenger has
+	// mapped by - the passengers variable in flight class
+	@ManyToMany(mappedBy = "passengers")
+	// f_p_join table for the many2many mapping, flight_fk for join, 1 additional fk - passenger_fk
+	private List<Flight> flights;
 
 	public Integer getId() {
 		return Id;
@@ -95,6 +103,20 @@ public class Passenger implements Serializable {
 
 	public void setFlightClass(FlightClass flightClass) {
 		this.flightClass = flightClass;
+	}
+
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
+	}
+
+	@Override
+	public String toString() {
+		return "Passenger [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
+				+ ", gender=" + gender + "]";
 	}
 
 }
