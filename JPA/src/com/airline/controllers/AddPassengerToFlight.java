@@ -46,6 +46,10 @@ public class AddPassengerToFlight extends HttpServlet {
 		String fid = request.getParameter("fid");
 		String pid = request.getParameter("pid");
 		
+		// add passenger to flight
+		fs.addPassengerToFlight(pid, fid);
+		
+		// after adding, redirect to flight list
 		response.sendRedirect("Flights");
 		
 	}
