@@ -15,6 +15,7 @@
 	
 	<table>
 		<tr>
+			<th>Id</th>
 			<th>First name</th>
 			<th>Last name</th>
 			<th>Date of Birth</th>

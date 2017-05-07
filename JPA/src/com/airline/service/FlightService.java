@@ -38,6 +38,11 @@ public class FlightService {
     	// em.persist(a); // propogated and cascaded from flight and saved automatically
     }
     
+    // to add passengers to a flight
+    public void addPassengerToFlight(String passengerId, String flightId) {
+    	
+    }
+    
     // to get list of all flights present in the system
     public List<Flight> getFlights() {
     	
