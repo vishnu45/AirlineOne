@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import com.airline.models.Airplane;
 import com.airline.models.Flight;
 import com.airline.models.Passenger;
+import com.airline.models.Pilot;
 
 /**
  * Session Bean implementation class FlightService
@@ -41,6 +42,31 @@ public class FlightService {
     	// em.persist(a); // propogated and cascaded from flight and saved automatically
     }
     
+    public void addPilotToFlight(String pilotId, String flightId) {
+
+		TypedQuery<Flight> fQuery = em.createNamedQuery("Flight.findById",
+				Flight.class);
+
+		fQuery.setParameter("id", Integer.parseInt(flightId));
+
+		Flight f = fQuery.getSingleResult();
+
+		TypedQuery<Pilot> pQuery = em.createNamedQuery("Pilot.findById",
+				Pilot.class);
+
+		pQuery.setParameter("id", Integer.parseInt(pilotId));
+
+		Pilot p = pQuery.getSingleResult();
+
+		List<Pilot> pList = f.getPilots();
+
+		pList.add(p);
+
+		f.setPilots(pList);
+		
+		p.setFlightForPilot(f);
+	}
+    
     // to add passengers to a flight
     public void addPassengerToFlight(String passengerId, String flightId) {
     	
@@ -49,17 +75,17 @@ public class FlightService {
     	CriteriaQuery<Passenger> cqPassenger = builder.createQuery(Passenger.class);    	
     	Root<Passenger> pRoot = cqPassenger.from(Passenger.class);
     	// select passenger only for the Id we provided which is of integer type
-    	cqPassenger.select(pRoot).where(builder.equal(pRoot.get("Id").as(Integer.class), passengerId));
+    	cqPassenger.select(pRoot).where(builder.equal(pRoot.get("id").as(Integer.class), passengerId));
     	
     	TypedQuery<Passenger> pQuery = em.createQuery(cqPassenger);
     	Passenger p = pQuery.getSingleResult();
     	
     	// Get the flight by Id
-    	// CriteriaBuilder builder = em.getCriteriaBuilder();
+    	builder = em.getCriteriaBuilder();
     	CriteriaQuery<Flight> cqFlight = builder.createQuery(Flight.class);    	
     	Root<Flight> fRoot = cqFlight.from(Flight.class);
     	// select flight only for the Id we provided which is of integer type
-    	cqFlight.select(fRoot).where(builder.equal(fRoot.get("Id").as(Integer.class), flightId));
+    	cqFlight.select(fRoot).where(builder.equal(fRoot.get("id").as(Integer.class), flightId));
     	
     	TypedQuery<Flight> fQuery = em.createQuery(cqFlight);
     	Flight f = fQuery.getSingleResult();

@@ -34,7 +34,7 @@ public class AddFlightTicketToPassenger extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class AddFlightTicketToPassenger extends HttpServlet {
 		ps.addFlightTicketToPassenger(fid, pid);
 		
 		// once the passenger is added to flight, redirect to flight list
-		response.sendRedirect("Flights");
+		response.sendRedirect("Passengers");
 		
 	}
 

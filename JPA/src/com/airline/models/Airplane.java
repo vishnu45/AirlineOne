@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
  *
  */
 @Entity
-
 public class Airplane implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ public class Airplane implements Serializable {
 	}
 
 	public void setId(Integer id) {
-		id = id;
+		this.id = id;
 	}
 
 	public String getPlaneMake() {

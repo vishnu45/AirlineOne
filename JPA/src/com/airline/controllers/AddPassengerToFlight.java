@@ -34,7 +34,7 @@ public class AddPassengerToFlight extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -42,14 +42,11 @@ public class AddPassengerToFlight extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// get passenger and flight from the jsp fancyform
 		String fid = request.getParameter("fid");
 		String pid = request.getParameter("pid");
 		
-		// add passenger to flight
 		fs.addPassengerToFlight(pid, fid);
 		
-		// after adding, redirect to flight list
 		response.sendRedirect("Flights");
 		
 	}

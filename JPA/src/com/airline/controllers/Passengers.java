@@ -23,7 +23,7 @@ public class Passengers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	PassengerService fs;
+	PassengerService ps;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +38,7 @@ public class Passengers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<Passenger> pList = (List<Passenger>) fs.getPassengers();
+		List<Passenger> pList = (List<Passenger>) ps.getPassengers();
 		// save flights onto a attribute of request
 		request.setAttribute("passenger_list", pList);
 		
@@ -52,7 +52,7 @@ public class Passengers extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

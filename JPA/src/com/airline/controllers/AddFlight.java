@@ -22,18 +22,18 @@ import com.airline.service.FlightService;
 @WebServlet("/AddFlight")
 public class AddFlight extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	// stateless session bean
+    @EJB
+    FlightService fs;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddFlight() {
         super();
         // TODO Auto-generated constructor stub
-    }
-    
-    // stateless session bean
-    @EJB
-    FlightService fs;
+    }    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

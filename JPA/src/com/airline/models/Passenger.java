@@ -34,7 +34,7 @@ public class Passenger implements Serializable {
 	// primary key of this particular Passenger entity
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 
 	private String firstName;
 
@@ -58,11 +58,11 @@ public class Passenger implements Serializable {
 	private List<Flight> flights;
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getFirstName() {
@@ -115,7 +115,7 @@ public class Passenger implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Passenger [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
+		return "Passenger [Id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
 				+ ", gender=" + gender + "]";
 	}
 
