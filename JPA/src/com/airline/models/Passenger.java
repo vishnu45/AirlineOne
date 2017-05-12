@@ -14,13 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Passenger
  *
  */
 @Entity
-
+@XmlRootElement
 public class Passenger implements Serializable {
 
 	// for this column not to be part of the database passenger table
