@@ -6,7 +6,9 @@ import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -44,6 +46,22 @@ public class PassengerWebService {
 		List<Passenger> pList = ps.getPassengers();
 
 		return pList;
+	}
+	
+	@GET
+	@Path("{passenger_id}")
+	@Produces(MediaType.APPLICATION_XML)
+	public Passenger getPassenger(@PathParam("passenger_id") Integer passengerId) {
+		
+		Passenger p = ps.getPassenger(passengerId);
+		
+		// if passengerId is invalid
+		if (p == null) {
+			// throw not found jaxrs exception
+			throw new NotFoundException("The passenger with the id " + passengerId + " was not found");
+		}
+		
+		return p;
 	}
 
 }
