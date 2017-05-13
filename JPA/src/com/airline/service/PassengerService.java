@@ -34,9 +34,9 @@ public class PassengerService {
 	private EntityManager em;
 
 	// for persisting passenger details onto model
-	public void addPassenger(Passenger p) {
-
+	public Passenger addPassenger(Passenger p) {
 		em.persist(p);
+		return p;
 	}
 
 	// add flight for the passenger
@@ -100,6 +100,6 @@ public class PassengerService {
 		}
 
 		return p;
-	}
+	}	
 
 }
