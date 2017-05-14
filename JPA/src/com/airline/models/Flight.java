@@ -64,7 +64,7 @@ public class Flight implements Serializable {
 	
 	// one2many since one flight can have multiple pilots
 	// mappedBy for creating the reference to pilot (like foreign key)
-	@OneToMany(mappedBy = "flightForPilot")
+	@OneToMany(mappedBy = "flightForPilot", cascade = { CascadeType.REMOVE })
 	private List<Pilot> pilots;
 	
 	// the list of passengers who have been reserved for the flight

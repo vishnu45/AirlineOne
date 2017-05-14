@@ -116,17 +116,14 @@ public class PassengerService {
 		if (pUpdated.getFirstName() != null) {
 			p.setFirstName(pUpdated.getFirstName());
 		}
-
 		// check if lastName is to be updated, then update lastname
 		if (pUpdated.getLastName() != null) {
 			p.setLastName(pUpdated.getLastName());
 		}
-
 		// check if dob is to be updated, then update dob
 		if (pUpdated.getDob() != null) {
 			p.setDob(pUpdated.getDob());
 		}
-
 		// check if gender is to be updated, then update gender
 		if (pUpdated.getGender() != null) {
 			p.setGender(pUpdated.getGender());
@@ -134,5 +131,28 @@ public class PassengerService {
 
 		return p;
 	}
+
+	// to update a passenger
+	public Passenger updatePassenger2(Integer passengerId, Passenger pUpdated) {
+
+		pUpdated.setId(passengerId);
+
+		// for an existing passenger
+		Passenger pCheckExist = em.find(Passenger.class, passengerId);
+
+		// if passenger not exits
+		if (pCheckExist == null) {
+			return null;
+		}
+
+		// uUpdated goes from being a POJO to be merged into the persistence
+		// context and starts being manager by the entity manager
+		em.merge(pUpdated);
+
+		return pCheckExist;
+	}
+	
+	// to delete a passenger
+	
 
 }

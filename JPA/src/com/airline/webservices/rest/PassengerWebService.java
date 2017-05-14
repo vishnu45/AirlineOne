@@ -6,7 +6,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
@@ -24,6 +26,7 @@ import com.airline.models.Passenger;
 import com.airline.service.PassengerService;
 
 @Path("/passengers")
+@Transactional
 public class PassengerWebService {
 
 	// to interact with the datasoruce we configured on the glassfish derby
@@ -98,12 +101,52 @@ public class PassengerWebService {
 		if (pUpdated == null) {
 			throw new NotFoundException("The passenger with an id " + passengerId + " was not found");
 		}
-		
+
 		// to build a URL path to the passenger which was created
 		UriBuilder pUriBuilder = pUriInfo.getAbsolutePathBuilder();
 		URI pUri = pUriBuilder.path(String.valueOf(pUpdated.getId())).build();
 
 		return Response.created(pUri).build();
+	}
+
+	// #2 - alternate way
+	// to update - PUT
+	@PUT
+	// to get the passengerId as query string
+	@Path("/edit2/{pId}")
+	// to consume the update data
+	@Consumes(MediaType.APPLICATION_XML)
+	// to update a passenger
+	public Response updatePassenger2(@PathParam("pId") Integer passengerId, Passenger pUpdated) {
+
+		pUpdated = ps.updatePassenger2(passengerId, pUpdated);
+
+		// however for invalid passengerId
+		if (pUpdated == null) {
+			throw new NotFoundException("The passenger with an id " + passengerId + " was not found");
+		}
+
+		// to build a URL path to the passenger which was created
+		UriBuilder pUriBuilder = pUriInfo.getAbsolutePathBuilder();
+		URI pUri = pUriBuilder.path(String.valueOf(pUpdated.getId())).build();
+
+		return Response.created(pUri).build();
+	}
+	
+	@DELETE
+	@Path("{passenger_id}")
+	// to delete a passenger
+	public Response deletePassenger(@PathParam("passenger_id") Integer passengerId) {
+		
+		Passenger passengerToRemove = em.find(Passenger.class, passengerId);
+		
+		if (passengerToRemove == null) {
+			throw new NotFoundException("The passenger with id " + passengerId + " was not found");
+		}
+		// remove passenger from em context
+		em.remove(passengerToRemove);
+		
+		return Response.noContent().build();
 	}
 
 }
